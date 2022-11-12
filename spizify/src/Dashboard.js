@@ -1,13 +1,14 @@
 import React from 'react'
 import useAuth from './useAuth'
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import './styles.css';
+import OverlayBar from './OverlayBar';
 
 export default function Dashboard({ code }) {
     //const accessToken = useAuth(code)
-    return (<div>
-        <nav className='Header py-2 text-black mb-4' style={{ backgroundColor: 'var(--accent-color)' }}>
-            <div className='container text-center'>
-                <h3 className='py-3 mx-2'>Todo App: React & Bootstrap</h3>
-            </div>
-        </nav>
+    return (<div className='background'>
+        <OverlayBar/>
+        
     </div>)
 }
