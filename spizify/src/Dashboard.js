@@ -7,7 +7,7 @@ import OverlayBar from './OverlayBar';
 import Card from 'react-bootstrap/Card';
 
 export default function Dashboard({ code }) {
-    //const accessToken = useAuth(code)
+    const accessToken = useAuth(code)
     
     return (<div className='background'>
         <OverlayBar/>
