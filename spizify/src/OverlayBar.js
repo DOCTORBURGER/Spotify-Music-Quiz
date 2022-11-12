@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import './styles.css';
 
 export default function OverlayBar() {
-
+    
     return (
         <Navbar bg="dark" expand="lg">
             <span className='span'>

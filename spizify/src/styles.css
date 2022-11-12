@@ -22,3 +22,22 @@
     width:100vw;
     background-color: #434541;
 }
+.playlistCard {
+    width:48vw;
+    margin:1%;
+    border:solid;
+    background-color:#2b2e29;
+    border-color: green;
+}
+.cardRow {
+    display:flex;
+}
+.white {
+    color:white;
+}
+.centerText {
+    color:white;
+    font-weight:bolder;
+    font-size:30px;
+    text-align:center;
+}
