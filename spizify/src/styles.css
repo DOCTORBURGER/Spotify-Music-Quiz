@@ -28,9 +28,11 @@
     border:solid;
     background-color:#000000;
     border-color: green;
+    display:inline-flex;
 }
 .cardRow {
-    display:flex;
+    width:100vw;
+    
 }
 .white {
     color:white;

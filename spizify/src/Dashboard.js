@@ -27,6 +27,20 @@ export default function Dashboard({ code }) {
                     </Card.Title>
                 </Card.Body>
             </Card>
+            <Card className='playlistCard'>
+                <Card.Body>
+                    <Card.Title className='white'>
+                        Playlist1
+                    </Card.Title>
+                </Card.Body>
+            </Card>
+            <Card className='playlistCard'>
+                <Card.Body>
+                    <Card.Title className='white'>
+                        Playlist2
+                    </Card.Title>
+                </Card.Body>
+            </Card>
         </div>
         
     </div>)
