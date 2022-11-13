@@ -49,3 +49,15 @@
 .SpotifyPlayer {
     display: none;
 }
+.quizLiked {
+    background-color: #141513;
+}
+.searchBox {
+    border-color: green;
+    border:solid;
+}
+.randomButton {
+    border-color: green;
+    border:solid;
+    color: #1DB954;
+}

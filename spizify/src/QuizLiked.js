@@ -80,15 +80,15 @@ export default function QuizLiked({ code }) {
           });
     }, [accessToken])
 
-    return <div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
-        <Form.Control type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
+    return <div className='quizLiked'><div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
+        <Form.Control className='searchBox' type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
         <div className='flex-grow-1 my-2' sytle={{overflowY: 'auto' }}>
             {searchResults.map(track => (
                 <TrackSearchResult track={track} key={track.uri} chooseTrack={guessTrack}/>
             ))}
         </div>
         <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
-        <div><button onClick={randomTrack}>Random Track</button></div>
+        <div><button className='randombutton' onClick={randomTrack}>Random Track</button></div>
 
-    </Container></div>
+    </Container></div> </div>
 }
