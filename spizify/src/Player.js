@@ -7,12 +7,14 @@ export default function Player({accessToken, trackUri}) {
     useEffect(() => setPlay(true), [trackUri])
 
     if (!accessToken) return null
-    return <SpotifyPlayer 
+    return <div className = "SpotifyPlayer"> <SpotifyPlayer
         token={accessToken}
         callback={state => {
             if(!state.isPlaying) setPlay(false)
         }}
         play = {play}
         uris={trackUri ? [trackUri] : []}
+        
     />
+    </div>
 }
