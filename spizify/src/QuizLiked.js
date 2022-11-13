@@ -33,8 +33,7 @@ export default function QuizLiked({ code }) {
     }
 
     function randomTrack() {
-        guessResult = ""
-        setPlayingTrack(savedTracks[Math.floor(Math.random() * 50)])
+        setPlayingTrack(savedTracks[Math.floor(Math.random() * savedTracks.length)])
         console.log(savedTracks)
         setSearch('')
         setPlaying(true)
