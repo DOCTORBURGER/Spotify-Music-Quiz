@@ -20,32 +20,7 @@ export default function Dashboard({ code }) {
         setPlayingTrack(track)
         setSearch('')
     }
-    function getUserData() {
-        //console.log(SpotifyWebApi)
-        
-        spotifyApi.getMe().then(data=> {
-            //console.log("name: " + data.body.display_name)//spotifyApi.getUserPlaylists(data.)
-            console.log(data)
-            var uri = (data.body.uri.split(":"))[2]
-            spotifyApi.getUserPlaylists(uri).then(function(data2) {
-                console.log(data2)
-            }).catch(err => {
-                console.log("ERROR! " + err)
-            })//tnmc3bi2dz3i8n93j7ncuhhom
-            /*
-            fetch(`https://api.spotify.com/v1/users/${data.body.display_name}/playlists`, {method:'GET', headers : ({
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + accessToken,
-                'Host': 'api.spotify.com'
-            })}).then(data2 => {
-                console.log(data2)
-            })*/
-            /*
-            spotifyApi.getUserPlaylists(data.body.display_name).then(function(data2)  {
-                console.log(data2)
-            })*/
-        })
-    }
+    
 
     useEffect(() => {
         if(!accessToken) return
@@ -78,7 +53,7 @@ export default function Dashboard({ code }) {
         return () => (cancel = true)
     }, [search, accessToken])
 
-    return <div><button onClick={getUserData}>request</button><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
+    return <div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
         <Form.Control type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
         <div className='flex-grow-1 my-2' sytle={{overflowY: 'auto' }}>
             {searchResults.map(track => (
