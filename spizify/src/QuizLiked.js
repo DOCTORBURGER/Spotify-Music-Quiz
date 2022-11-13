@@ -16,6 +16,9 @@ export default function QuizLiked({ code }) {
     const [searchResults, setSearchResults] = useState([])
     const [playingTrack, setPlayingTrack] = useState()
     const [savedTracks, setSavedTracks] = useState([])
+    const [playing, setPlaying] = useState(false)
+    const [count, setCount] = useState(0)
+    const [pause, setPause] = useState(false)
 
     function guessTrack(track) {
         if (track.uri == playingTrack.uri) console.log('Track Guessed Correctly')
@@ -26,6 +29,8 @@ export default function QuizLiked({ code }) {
         setPlayingTrack(savedTracks[Math.floor(Math.random() * 50)])
         console.log(savedTracks)
         setSearch('')
+        setPlaying(true)
+        setPause(false)
     }
     
     useEffect(() => {
@@ -60,6 +65,20 @@ export default function QuizLiked({ code }) {
     }, [search, accessToken])
 
     useEffect(() => {
+        setTimeout(() => {
+            console.log(playing)
+            if(playing){
+                setCount((count) => count + 1)
+                if(count === 5) {
+                    setPause(true)
+                    setPlaying(false)
+                    setCount(0)
+                }
+            }
+        }, 1000)
+    })
+
+    useEffect(() => {
         if(!accessToken) return
 
         spotifyApi.getMySavedTracks({
@@ -88,7 +107,7 @@ export default function QuizLiked({ code }) {
             ))}
         </div>
         <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
-        <div><button className='randombutton' onClick={randomTrack}>Random Track</button></div>
+        <div><button onClick={randomTrack}>Random Track</button></div>
 
     </Container></div> </div>
 }
