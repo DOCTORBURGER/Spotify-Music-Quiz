@@ -106,7 +106,7 @@ export default function QuizLiked({ code }) {
                 <TrackSearchResult track={track} key={track.uri} chooseTrack={guessTrack}/>
             ))}
         </div>
-        <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
+        <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} pause={pause}/></div>
         <div><button onClick={randomTrack}>Random Track</button></div>
 
     </Container></div> </div>
