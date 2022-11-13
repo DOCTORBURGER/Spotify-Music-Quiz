@@ -5,7 +5,8 @@ import { Container, Form } from 'react-bootstrap'
 import SpotifyWebApi from 'spotify-web-api-node'
 import TrackSearchResult from './TrackSearchResult'
 import OverlayBar from './OverlayBar';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: '7be5175ad2c840fd802af2ec7a0d0b92'
@@ -21,13 +22,13 @@ export default function QuizLiked({ code }) {
     const [count, setCount] = useState(0)
     const [pause, setPause] = useState(false)
     let guessResult = "";
+    const notify = (e) => toast(e);
 
     function guessTrack(track) {
         if (track.uri == playingTrack.uri){
-            console.log('Track Guessed Correctly')
-            guessResult = "Correct"
+            notify("You guessed correctly")
         } 
-        else guessResult = "Incorrect"
+        else notify("Wrong guess!")
         
         setSearch('')
     }
@@ -109,7 +110,7 @@ export default function QuizLiked({ code }) {
     return <div className='quizLiked'><div>
         <OverlayBar/>
         <Container className="d-flex flex-column py-2" style={{ height: '94vh' }}>
-        
+        <ToastContainer />
         <Form.Control className='searchBox' type="search" placeholder="Search Songs and Click to Guess" values={search} onChange={e => setSearch(e.target.value)}/>
         <div className='flex-grow-1 my-2' sytle={{overflowY: 'auto' }}>
             {searchResults.map(track => (
