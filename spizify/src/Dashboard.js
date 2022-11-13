@@ -26,11 +26,12 @@ export default function Dashboard({ code }) {
         spotifyApi.getMe().then(data=> {
             //console.log("name: " + data.body.display_name)//spotifyApi.getUserPlaylists(data.)
             console.log(data)
-            spotifyApi.getUserPlaylists(data.body.display_name).then(function(data2) {
+            var uri = (data.body.uri.split(":"))[2]
+            spotifyApi.getUserPlaylists(uri).then(function(data2) {
                 console.log(data2)
             }).catch(err => {
                 console.log("ERROR! " + err)
-            })
+            })//tnmc3bi2dz3i8n93j7ncuhhom
             /*
             fetch(`https://api.spotify.com/v1/users/${data.body.display_name}/playlists`, {method:'GET', headers : ({
                 'Content-Type': 'application/json',
