@@ -5,7 +5,7 @@ import useAuth from './useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
 import React from 'react';
 import { useState, useEffect } from 'react'
-import {Routes, Route, useNavigate} from 'react-router-dom';
+// import {Routes, Route, useNavigate} from 'react-router-dom';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: '7be5175ad2c840fd802af2ec7a0d0b92'
