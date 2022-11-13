@@ -4,6 +4,7 @@ import Player from './Player'
 import { Container, Form } from 'react-bootstrap'
 import SpotifyWebApi from 'spotify-web-api-node'
 import TrackSearchResult from './TrackSearchResult'
+import OverlayBar from './OverlayBar';
 
 
 const spotifyApi = new SpotifyWebApi({
@@ -19,13 +20,20 @@ export default function QuizLiked({ code }) {
     const [playing, setPlaying] = useState(false)
     const [count, setCount] = useState(0)
     const [pause, setPause] = useState(false)
+    let guessResult = "";
 
     function guessTrack(track) {
-        if (track.uri == playingTrack.uri) console.log('Track Guessed Correctly')
+        if (track.uri == playingTrack.uri){
+            console.log('Track Guessed Correctly')
+            guessResult = "Correct"
+        } 
+        else guessResult = "Incorrect"
+        
         setSearch('')
     }
 
     function randomTrack() {
+        guessResult = ""
         setPlayingTrack(savedTracks[Math.floor(Math.random() * 50)])
         console.log(savedTracks)
         setSearch('')
@@ -69,7 +77,7 @@ export default function QuizLiked({ code }) {
             console.log(playing)
             if(playing){
                 setCount((count) => count + 1)
-                if(count === 5) {
+                if(count === 10) {
                     setPause(true)
                     setPlaying(false)
                     setCount(0)
@@ -99,15 +107,19 @@ export default function QuizLiked({ code }) {
           });
     }, [accessToken])
 
-    return <div className='quizLiked'><div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
-        <Form.Control className='searchBox' type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
+    return <div className='quizLiked'><div>
+        <OverlayBar/>
+        <Container className="d-flex flex-column py-2" style={{ height: '94vh' }}>
+        
+        <Form.Control className='searchBox' type="search" placeholder="Search Songs and Click to Guess" values={search} onChange={e => setSearch(e.target.value)}/>
         <div className='flex-grow-1 my-2' sytle={{overflowY: 'auto' }}>
             {searchResults.map(track => (
                 <TrackSearchResult track={track} key={track.uri} chooseTrack={guessTrack}/>
             ))}
         </div>
         <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} pause={pause}/></div>
-        <div><button onClick={randomTrack}>Random Track</button></div>
+        <div><button className="btn btn-success btn-lg" onClick={randomTrack}>Start Random Song</button> <h1> {guessResult}</h1> </div>
+        
 
     </Container></div> </div>
 }

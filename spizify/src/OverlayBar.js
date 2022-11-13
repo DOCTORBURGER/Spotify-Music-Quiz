@@ -7,7 +7,6 @@ export default function OverlayBar() {
         <Navbar className='banner' expand="lg">
             <span className='span'>
                 <div className='left green'>Spizify</div>
-                <div className='right green'>Logged in as: </div>
             </span>
 
         </Navbar>
