@@ -46,3 +46,6 @@
 .banner {
     background-color: black;
 }
+.SpotifyPlayer {
+    display: none;
+}
