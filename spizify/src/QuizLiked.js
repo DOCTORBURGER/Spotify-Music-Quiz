@@ -16,6 +16,9 @@ export default function QuizLiked({ code }) {
     const [searchResults, setSearchResults] = useState([])
     const [playingTrack, setPlayingTrack] = useState()
     const [savedTracks, setSavedTracks] = useState([])
+    const [playing, setPlaying] = useState(false)
+    const [count, setCount] = useState(0)
+    const [pause, setPause] = useState(false)
 
     function guessTrack(track) {
         if (track.uri == playingTrack.uri) console.log('Track Guessed Correctly')
@@ -26,6 +29,8 @@ export default function QuizLiked({ code }) {
         setPlayingTrack(savedTracks[Math.floor(Math.random() * savedTracks.length)])
         console.log(savedTracks)
         setSearch('')
+        setPlaying(true)
+        setPause(false)
     }
     
     useEffect(() => {
@@ -60,6 +65,20 @@ export default function QuizLiked({ code }) {
     }, [search, accessToken])
 
     useEffect(() => {
+        setTimeout(() => {
+            console.log(playing)
+            if(playing){
+                setCount((count) => count + 1)
+                if(count === 5) {
+                    setPause(true)
+                    setPlaying(false)
+                    setCount(0)
+                }
+            }
+        }, 1000)
+    })
+
+    useEffect(() => {
         if(!accessToken) return
 
         spotifyApi.getMySavedTracks({
@@ -80,15 +99,15 @@ export default function QuizLiked({ code }) {
           });
     }, [accessToken])
 
-    return <div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
-        <Form.Control type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
+    return <div className='quizLiked'><div><Container className="d-flex flex-column py-2" style={{ height: '100vh' }}>
+        <Form.Control className='searchBox' type="search" placeholder="Search Songs/ Artists" values={search} onChange={e => setSearch(e.target.value)}/>
         <div className='flex-grow-1 my-2' sytle={{overflowY: 'auto' }}>
             {searchResults.map(track => (
                 <TrackSearchResult track={track} key={track.uri} chooseTrack={guessTrack}/>
             ))}
         </div>
-        <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} /></div>
+        <div><Player accessToken={accessToken} trackUri={playingTrack?.uri} pause={pause}/></div>
         <div><button onClick={randomTrack}>Random Track</button></div>
 
-    </Container></div>
+    </Container></div> </div>
 }
